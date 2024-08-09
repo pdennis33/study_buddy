@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Flashcards for <%= @topic.title %></h1>
+<h3>Create a new flashcard.</h3>
+<%= render 'flashcards/form', flashcard: @flashcard, topic: @topic %>
+
+<div id="flashcards">
+  <% @flashcards.each do |flashcard| %>
+    <div class="list-item">
+      <p><strong>Question: </strong><%= flashcard.question %></p>
+      <p>
+        <%= link_to 'Edit this flashcard', edit_topic_flashcard_path(@topic, flashcard) %>
+        <%= button_to "Destroy this flashcard", topic_flashcard_path(@topic, flashcard), method: :delete, data: {confirm: "Are you sure you want to destroy this flashcard?", turbo: false} %>      </p>
+    </div>
+  <% end %>
+</div>

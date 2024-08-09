@@ -8,6 +8,8 @@ class TopicsController < ApplicationController
 
   # GET /topics/1 or /topics/1.json
   def show
+    @flashcards = @topic.flashcards.where.not(id: nil)
+    @flashcard = @topic.flashcards.build
   end
 
   # GET /topics/new

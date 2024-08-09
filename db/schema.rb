@@ -14,14 +14,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_11_124718) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "quizzes", force: :cascade do |t|
+  create_table "flashcards", force: :cascade do |t|
     t.text "question"
     t.text "answer"
     t.text "hint"
     t.bigint "topic_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["topic_id"], name: "index_quizzes_on_topic_id"
+    t.index ["topic_id"], name: "index_flashcards_on_topic_id"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -31,5 +31,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_11_124718) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "quizzes", "topics"
+  add_foreign_key "flashcards", "topics"
 end

@@ -5,12 +5,12 @@ class FlashcardsTest < ApplicationSystemTestCase
     @flashcard = flashcards(:one)
   end
 
-  test "visiting the index" do
+  it "visiting the index" do
     visit flashcards_url
     assert_selector "h1", text: "Flashcards"
   end
 
-  test "should create flashcard" do
+  it "should create flashcard" do
     visit flashcards_url
     click_on "New flashcard"
 
@@ -24,7 +24,7 @@ class FlashcardsTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
-  test "should update Flashcard" do
+  it "should update Flashcard" do
     visit flashcard_url(@flashcard)
     click_on "Edit this flashcard", match: :first
 
@@ -38,7 +38,7 @@ class FlashcardsTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
-  test "should destroy Flashcard" do
+  it "should destroy Flashcard" do
     visit flashcard_url(@flashcard)
     click_on "Destroy this flashcard", match: :first
 

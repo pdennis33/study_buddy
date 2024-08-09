@@ -4,10 +4,12 @@
 
 <div id="topics">
   <% @topics.each do |topic| %>
-    <%= render topic %>
-    <p>
-      <%= link_to "Show this topic", topic %>
-    </p>
+    <div class="list-item">
+      <%= render topic %>
+      <p>
+        <%= link_to "Show this topic", topic %>
+      </p>
+    </div>
   <% end %>
 </div>
 

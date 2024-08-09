@@ -1,11 +1,11 @@
-<%= form_with(model: [ @topic, quiz ]) do |form| %>
-  <% if quiz.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
+<%= form_with(model: [@topic, flashcard], local: true) do |form| %>
+  <% if flashcard.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(flashcard.errors.count, "error") %> prohibited this flashcard from being saved:</h2>
 
       <ul>
-        <% quiz.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% flashcard.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
@@ -24,11 +24,6 @@
   <div>
     <%= form.label :hint, style: "display: block" %>
     <%= form.text_area :hint %>
-  </div>
-
-  <div>
-    <%= form.label :topic_id, style: "display: block" %>
-    <%= form.text_field :topic_id %>
   </div>
 
   <div>
