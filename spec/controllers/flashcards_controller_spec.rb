@@ -1,48 +1,49 @@
 require 'rails_helper'
 
-class FlashcardsControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @flashcard = flashcards(:one)
-  end
+RSpec.describe FlashcardsController, type: :request do
+  let(:topic) { create(:topic) }
+  let(:flashcard) { create(:flashcard, topic: topic) }
 
   it "should get index" do
-    get flashcards_url
-    expect(response).to have_http_status(:)success
+    get topic_flashcards_url(topic)
+    expect(response).to have_http_status(:success)
   end
 
   it "should get new" do
-    get new_flashcard_url
-    expect(response).to have_http_status(:)success
+    get new_topic_flashcard_url(topic)
+    expect(response).to have_http_status(:success)
   end
 
   it "should create flashcard" do
-    assert_difference("Flashcard.count") do
-      post flashcards_url, params: { flashcard: { answer: @flashcard.answer, hint: @flashcard.hint, question: @flashcard.question, topic_id: @flashcard.topic_id } }
-    end
+    flashcard
+    expect {
+      post topic_flashcards_url(topic), params: { flashcard: { answer: flashcard.answer, hint: flashcard.hint, question: flashcard.question, topic_id: topic.id } }
+    }.to change(Flashcard, :count).by(1)
 
-    expect(response).to redirect_to()flashcard_url(Flashcard.last)
+    expect(response).to redirect_to(topic_flashcards_url(topic))
   end
 
   it "should show flashcard" do
-    get flashcard_url(@flashcard)
-    expect(response).to have_http_status(:)success
+    get topic_flashcard_url(topic, flashcard)
+    expect(response).to have_http_status(:success)
   end
 
   it "should get edit" do
-    get edit_flashcard_url(@flashcard)
-    expect(response).to have_http_status(:)success
+    get edit_topic_flashcard_url(topic, flashcard)
+    expect(response).to have_http_status(:success)
   end
 
   it "should update flashcard" do
-    patch flashcard_url(@flashcard), params: { flashcard: { answer: @flashcard.answer, hint: @flashcard.hint, question: @flashcard.question, topic_id: @flashcard.topic_id } }
-    expect(response).to redirect_to()flashcard_url(@flashcard)
+    patch topic_flashcard_url(topic, flashcard), params: { flashcard: { answer: flashcard.answer, hint: flashcard.hint, question: flashcard.question, topic_id: topic.id } }
+    expect(response).to redirect_to(topic_flashcards_url(topic))
   end
 
   it "should destroy flashcard" do
-    assert_difference("Flashcard.count", -1) do
-      delete flashcard_url(@flashcard)
-    end
+    flashcard
+    expect {
+      delete topic_flashcard_url(topic, flashcard)
+    }.to change(Flashcard, :count).by(-1)
 
-    expect(response).to redirect_to()flashcards_url
+    expect(response).to redirect_to(topic_flashcards_url(topic))
   end
 end
