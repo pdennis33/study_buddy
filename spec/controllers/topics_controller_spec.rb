@@ -13,7 +13,7 @@ RSpec.describe TopicsController, type: :request do
     expect(response).to have_http_status(:success)
   end
 
-  it "should create topic" do
+  it "should create a topic" do
     topic
     expect {
       post topics_url, params: { topic: { description: topic.description, title: topic.title } }
@@ -44,5 +44,20 @@ RSpec.describe TopicsController, type: :request do
     }.to change(Topic, :count).by(-1)
 
     expect(response).to redirect_to(topics_url)
+  end
+
+  context "with invalid params" do
+    it "does not create a topic" do
+      expect {
+        post topics_url, params: { topic: { description: nil, title: nil } }
+      }.to change(Topic, :count).by(0)
+
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
+    it "does not update the topic" do
+      patch topic_url(topic), params: { topic: { description: nil, title: nil } }
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
   end
 end

@@ -32,3 +32,5 @@
 
 # RubyMine
 /.idea
+
+coverage

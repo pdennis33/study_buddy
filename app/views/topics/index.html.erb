@@ -2,9 +2,9 @@
 
 <h1>Topics</h1>
 
-<div id="topics">
+<div id="topics" class="topics-container">
   <% @topics.each do |topic| %>
-    <div class="list-item">
+    <div class="list-item grid-list-item">
       <%= render topic %>
       <p>
         <%= link_to "Show this topic", topic %>

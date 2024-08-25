@@ -46,4 +46,19 @@ RSpec.describe FlashcardsController, type: :request do
 
     expect(response).to redirect_to(topic_flashcards_url(topic))
   end
+
+  context "with invalid params" do
+    it "does not create a flashcard" do
+      expect {
+        post topic_flashcards_url(topic), params: { flashcard: { answer: nil, hint: nil, question: nil, topic_id: nil } }
+      }.to change(Flashcard, :count).by(0)
+
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
+    it "does not update the flashcard" do
+      patch topic_flashcard_url(topic, flashcard), params: { flashcard: { answer: nil, hint: nil, question: nil, topic_id: nil } }
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+  end
 end
