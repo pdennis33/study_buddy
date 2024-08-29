@@ -1,0 +1,31 @@
+<div style="text-align: center; margin-top: 50px;">
+  <h2><%= @flashcard.question %></h2>
+
+  <div id="hint" style="margin-top: 20px; display: none;">
+    <p><strong>Hint:</strong> <%= @flashcard.hint %></p>
+  </div>
+
+  <div id="answer" style="margin-top: 20px; display: none;">
+    <p><strong>Answer:</strong> <%= @flashcard.answer %></p>
+  </div>
+  <button onclick="document.getElementById('hint').style.display='block'">Show Hint</button>
+  <button onclick="document.getElementById('answer').style.display='block'">Show Answer</button>
+
+  <div style="margin-top: 40px;">
+    <% if @previous_flashcard %>
+      <%= link_to 'Previous Question', quiz_flashcard_topic_path(@topic, @previous_flashcard), class: 'btn btn-primary' %>
+    <% else %>
+      <button class="btn btn-primary" disabled>Previous Question</button>
+    <% end %>
+
+    <% if @next_flashcard %>
+      <%= link_to 'Next Question', quiz_flashcard_topic_path(@topic, @next_flashcard), class: 'btn btn-primary' %>
+    <% else %>
+      <button class="btn btn-primary" disabled>Next Question</button>
+    <% end %>
+  </div>
+
+  <div style="margin-top: 40px;">
+    <%= link_to "Back to #{@topic.title}", topic_path(@topic), class: 'btn btn-secondary' %>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_action :set_topic, only: %i[ show edit update destroy ]
+  before_action :set_topic, only: %i[ show edit update destroy start_quiz quiz ]
 
   # GET /topics or /topics.json
   def index
@@ -57,6 +57,16 @@ class TopicsController < ApplicationController
       format.html { redirect_to topics_url, notice: "Topic was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def start_quiz
+    redirect_to quiz_flashcard_topic_path(@topic, @topic.flashcards.first)
+  end
+
+  def quiz
+    @flashcard = @topic.flashcards.find(params[:flashcard_id])
+    @previous_flashcard = @topic.flashcards.where('id < ?', @flashcard.id).last
+    @next_flashcard = @topic.flashcards.where('id > ?', @flashcard.id).first
   end
 
   private

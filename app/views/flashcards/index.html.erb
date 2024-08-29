@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Flashcards for <%= @topic.title %></h1>
+<h1>Flashcards for <%= link_to "#{@topic.title}", topic_path(@topic), class: 'link-plain' %></h1>
 <h3>Create a new flashcard.</h3>
 <%= render 'flashcards/form', flashcard: @flashcard, topic: @topic %>
 
@@ -13,4 +13,8 @@
         <%= button_to "Destroy this flashcard", topic_flashcard_path(@topic, flashcard), method: :delete, data: {confirm: "Are you sure you want to destroy this flashcard?", turbo: false} %>      </p>
     </div>
   <% end %>
+</div>
+
+<div style="margin-top: 40px;">
+  <%= link_to "Back to #{@topic.title}", topic_path(@topic) %>
 </div>
