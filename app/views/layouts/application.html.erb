@@ -1,4 +1,9 @@
-<!-- app/views/layouts/application.html.erb -->
+<!--
+I took the approach to use simplecss from a rails demo. This looks nice
+while keeping the focus on the functionality and usefulness of this application.
+I chatted with ChatGPT about how to use CSS effectively to style the application
+in the way that I envisioned.
+ -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +13,8 @@
   <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
   <%= javascript_importmap_tags %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
       body {
