@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Flashcards for <%= link_to "#{@topic.title}", topic_path(@topic), class: 'link-plain' %></h1>
 <h3>Create a new flashcard.</h3>
 <%= render 'flashcards/form', flashcard: @flashcard, topic: @topic %>

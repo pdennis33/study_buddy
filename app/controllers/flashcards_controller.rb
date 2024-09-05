@@ -1,4 +1,5 @@
 class FlashcardsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_topic
   before_action :set_flashcard, only: %i[ show edit update destroy ]
 
@@ -62,7 +63,7 @@ class FlashcardsController < ApplicationController
   private
 
     def set_topic
-      @topic = Topic.find(params[:topic_id])
+      @topic = current_user.topics.find(params[:topic_id])
     end
 
     # Use callbacks to share common setup or constraints between actions.

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'home/index'
+  devise_for :users
   resources :topics do
     resources :flashcards
     member do
@@ -9,5 +11,5 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "topics#index"
+  root to: "home#index"
 end
