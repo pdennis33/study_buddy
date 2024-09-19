@@ -1,25 +1,23 @@
-<style>
-    body {
-        display: block !important;
-        grid-template-columns: none !important; /* Remove any grid-template-columns */
-    }
-
-    *,:before,:after {
-        box-sizing: content-box;
-    }
-</style>
-
 <h1>Topics</h1>
 
-<div id="topics" class="topics-container">
+<div id="topics" class="row g-3 mb-3">
   <% @topics.each do |topic| %>
-    <div class="list-item grid-list-item">
-      <%= render topic %>
-      <p>
-        <%= link_to "Show this topic", topic %>
-      </p>
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Title: <%= topic.title %>:</h5>
+          <p class="card-text"><strong>Description: </strong><%= topic.description %></p>
+          <p>
+            <%= link_to "Show this topic", topic, class: "btn btn-primary" %>
+          </p>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
 
-<%= link_to "New topic", new_topic_path %>
+<div class="row">
+  <div class="col">
+    <%= link_to "New topic", new_topic_path, class: "btn btn-secondary btn-lg" %>
+  </div>
+</div>

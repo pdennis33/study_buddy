@@ -1,32 +1,36 @@
-<%= form_with(model: [@topic, flashcard], local: true) do |form| %>
-  <% if flashcard.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(flashcard.errors.count, "error") %> prohibited this flashcard from being saved:</h2>
+<div class="row mb-3">
+  <div class="col">
+    <%= form_with(model: [@topic, flashcard], local: true) do |form| %>
+      <% if flashcard.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(flashcard.errors.count, "error") %> prohibited this flashcard from being saved:</h2>
 
-      <ul>
-        <% flashcard.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% flashcard.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div>
-    <%= form.label :question, style: "display: block" %>
-    <%= form.text_area :question %>
+      <div>
+        <%= form.label :question, style: "display: block" %>
+        <%= form.text_area :question %>
+      </div>
+
+      <div>
+        <%= form.label :answer, style: "display: block" %>
+        <%= form.text_area :answer %>
+      </div>
+
+      <div>
+        <%= form.label :hint, style: "display: block" %>
+        <%= form.text_area :hint %>
+      </div>
+
+      <div>
+        <%= form.submit class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :answer, style: "display: block" %>
-    <%= form.text_area :answer %>
-  </div>
-
-  <div>
-    <%= form.label :hint, style: "display: block" %>
-    <%= form.text_area :hint %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

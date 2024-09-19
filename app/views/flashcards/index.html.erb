@@ -1,18 +1,28 @@
-<h1>Flashcards for <%= link_to "#{@topic.title}", topic_path(@topic), class: 'link-plain' %></h1>
+<h1>Flashcards
+  for <%= link_to "#{@topic.title}", topic_path(@topic), class: 'btn btn-dark btn-xlg' %></h1>
 <h3>Create a new flashcard.</h3>
 <%= render 'flashcards/form', flashcard: @flashcard, topic: @topic %>
 
-<div id="flashcards">
-  <% @flashcards.each do |flashcard| %>
-    <div class="list-item">
-      <p><strong>Question: </strong><%= flashcard.question %></p>
-      <p>
-        <%= link_to 'Edit this flashcard', edit_topic_flashcard_path(@topic, flashcard) %>
-        <%= button_to "Destroy this flashcard", topic_flashcard_path(@topic, flashcard), method: :delete, data: {confirm: "Are you sure you want to destroy this flashcard?", turbo: false} %>      </p>
+<div id="flashcards" class="row g-3 mb-3">
+  <% @flashcards.each_with_index do |flashcard, i| %>
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Question <%= i + 1 %>:</h5>
+          <p class="card-text"><%= flashcard.question %></p>
+          <%= link_to 'Edit', edit_topic_flashcard_path(@topic, flashcard), class: "btn btn-primary" %>
+          <%= button_to 'Delete', topic_flashcard_path(@topic, flashcard),
+            method: :delete,
+            data: {confirm: "Are you sure you want to destroy this flashcard?"},
+            class: "btn btn-danger",
+            form_class: "d-inline" %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
-
-<div style="margin-top: 40px;">
-  <%= link_to "Back to #{@topic.title}", topic_path(@topic) %>
+<div class="row">
+  <div class="col">
+    <%= link_to "Back to #{@topic.title}", topic_path(@topic), class: "btn btn-secondary btn-lg" %>
+  </div>
 </div>
