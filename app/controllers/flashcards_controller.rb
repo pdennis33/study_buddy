@@ -1,7 +1,7 @@
 class FlashcardsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_topic
-  before_action :set_flashcard, only: %i[ show edit update destroy ]
+  before_action :set_flashcard, only: %i[ edit update destroy ]
 
   # GET /flashcards or /flashcards.json
   def index
@@ -11,6 +11,7 @@ class FlashcardsController < ApplicationController
 
   # GET /flashcards/1 or /flashcards/1.json
   def show
+    redirect_to topic_flashcards_url
   end
 
   # GET /flashcards/new
