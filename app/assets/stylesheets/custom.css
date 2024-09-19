@@ -10,6 +10,12 @@ body {
     --bs-btn-font-size: 2rem !important;;
 }
 
+button {
+    background-color: inherit;
+    color: inherit;
+    border: inherit;
+}
+
 .list-item {
     background-color: white;
     border: 1px solid #ddd;
