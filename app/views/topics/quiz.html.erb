@@ -9,6 +9,7 @@
       <button onclick="document.getElementById('answer').style.display='block'" class="btn btn-lg btn-secondary">Show
         Answer
       </button>
+      <%= link_to 'Edit Flashcard', edit_topic_flashcard_path(@topic, @flashcard),  class: "btn btn-lg btn-secondary"%>
     </div>
 
     <div id="hint" class="mb-5" style="display: none;">
