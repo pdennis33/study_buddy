@@ -66,6 +66,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.perform_deliveries = true
+
   config.action_mailer.smtp_settings = {
     address:              'in-v3.mailjet.com',
     port:                 587,
