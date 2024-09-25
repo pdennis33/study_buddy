@@ -62,9 +62,21 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "study_buddy_production"
 
+  config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.smtp_settings = {
+    address:              'in-v3.mailjet.com',
+    port:                 587,
+    domain:               'whispering-bastion-02274-fdd76e5a7d18.herokuapp.com',
+    user_name:            ENV['MAILJET_API_KEY'],  # Your Mailjet API key
+    password:             ENV['MAILJET_SECRET_KEY'],  # Your Mailjet secret key
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
+
+  config.action_mailer.default_url_options = { host: 'whispering-bastion-02274-fdd76e5a7d18.herokuapp.com', protocol: 'https' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
