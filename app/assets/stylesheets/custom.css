@@ -10,6 +10,33 @@ body {
     --bs-btn-font-size: 2rem !important;;
 }
 
+.img-sign-in {
+    max-width: 250px;
+}
+
+.img-sign-in-icon {
+    max-width: 50px;
+}
+
+/* General sign-in button styling */
+.img-sign-in-icon {
+    height: 40px; /* Adjust height to match both logos */
+    margin-right: 10px; /* Space between logo and text */
+}
+
+/* GitHub Sign-In Button */
+.btn-github-sign-in {
+    display: inline-flex;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    font-size: 19px;
+}
+
 button {
     background-color: inherit;
     color: inherit;
