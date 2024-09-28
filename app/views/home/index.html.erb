@@ -2,30 +2,45 @@
   <div class="col text-center mt-5">
     <div class="jumbotron pb-3">
       <h1 class="display-4">Welcome to StudyBuddy!</h1>
-      <p class="lead">Create topics, add flashcards, and start quizzing your way to success!</p>
+      <p class="lead">Create topics, add flashcards, and start quizzing your way
+        to success!</p>
     </div>
 
     <div class="row justify-content-center mt-3">
       <div class="col-md-4">
         <h3>1. Create a Topic</h3>
-        <p>Organize your study materials by creating different topics for your subjects.</p>
+        <p>Organize your study materials by creating different topics for your
+          subjects.</p>
       </div>
       <div class="col-md-4">
         <h3>2. Add Flashcards</h3>
-        <p>Add questions, answers, and optional hints to create flashcards for each topic.</p>
+        <p>Add questions, answers, and optional hints to create flashcards for
+          each topic.</p>
       </div>
       <div class="col-md-4">
         <h3>3. Start Quizzing</h3>
-        <p>Test your knowledge by quizzing yourself and revealing hints and answers when needed.</p>
+        <p>Test your knowledge by quizzing yourself and revealing hints and
+          answers when needed.</p>
       </div>
     </div>
 
-    <div class="mt-5">
+    <div class="row justify-content-center mt-5">
       <% if user_signed_in? %>
-        <%= link_to "Go to Topics", topics_path, class: "btn btn-primary btn-xlg" %>
+        <div class="col-auto">
+          <%= link_to "Go to Topics", topics_path, class: "btn btn-primary btn-xlg" %>
+        </div>
       <% else %>
-        <li><%= button_to 'Sign In with Google', user_google_oauth2_omniauth_authorize_path, class: "btn btn-success btn-lg mr-2", data: { turbo: false } %></li>
-        <li><%= button_to 'Sign In with GitHub', user_github_omniauth_authorize_path, class: "btn btn-success btn-lg mr-2", data: { turbo: false } %></li>
+        <div class="col-auto">
+          <%= button_to user_google_oauth2_omniauth_authorize_path, data: {turbo: false} do %>
+            <%= image_tag 'web_dark_sq_SI@2x.png', alt: 'Google Logo', class: "img-sign-in" %>
+          <% end %>
+        </div>
+        <div class="col-auto">
+          <%= button_to user_github_omniauth_authorize_path, class: "btn-github-sign-in", data: {turbo: false} do %>
+            <%= image_tag 'github-mark-white.png', alt: 'GitHub Logo', class: "img-sign-in-icon" %>
+            Sign In with GitHub
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
