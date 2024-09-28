@@ -69,11 +69,11 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.smtp_settings = {
-    address:              'in-v3.mailjet.com',
+    address:              'smtp.sendgrid.net',
     port:                 587,
     domain:               'whispering-bastion-02274-fdd76e5a7d18.herokuapp.com',
-    user_name:            ENV['MAILJET_API_KEY'],  # Your Mailjet API key
-    password:             ENV['MAILJET_SECRET_KEY'],  # Your Mailjet secret key
+    user_name:            'apikey', # This is literal, don't change it
+    password:             ENV['SENDGRID_API_KEY'], # Fetch from the environment variable set by Heroku
     authentication:       'plain',
     enable_starttls_auto: true
   }
