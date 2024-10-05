@@ -1,3 +1,7 @@
+// I used ChatGPT to help me create this javascript file. I conversed with it to
+// let it know what I wanted to do and it generated the code for me. I then
+// examined the code and discussed it with ChatGPT to understand how it works.
+
 function initializeImportButton() {
   // Handle flashcards file import
   const importButton = document.getElementById("import-button");

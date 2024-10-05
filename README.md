@@ -1,6 +1,6 @@
 # Study Buddy
 
-### Video Demo: [url here]
+### Video Demo: https://youtu.be/LIZoWweqF5g
 
 ### Description:
 Study Buddy is a web application who's purpose is to help users study for any topic they desire, in an effective and fun way. There are a few main components involved in this application that allow it to function in this way:
