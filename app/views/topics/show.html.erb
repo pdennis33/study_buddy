@@ -9,9 +9,9 @@
     class: "btn btn-primary btn-xlg #{'disabled' if @flashcards.empty?}" %>
 </div></div>
 
-<div class="row m-3">
-  <div class="col col-sm-6 m-auto">
-    <div class="card">
+<div class="row m-3 align-items-start">
+  <div class="col col-sm-6">
+    <div class="card mb-3">
       <div class="card-body">
         <h5 class="card-title">Title: <%= @topic.title %>:</h5>
         <p class="card-text">
@@ -19,8 +19,13 @@
         </p>
         <div>
           <%= link_to "Edit", edit_topic_path(@topic), class: "btn btn-primary" %>
-          <%= link_to "Delete", @topic, method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure you want to destroy this topic?"} %>
+          <%= link_to "Delete", @topic, method: :delete, class: "btn btn-danger", data: {confirm: "WARNING: THIS WILL DELETE THIS TOPIC AND ALL OF ITS FLASHCARDS. Are you sure you want to continue and destroy this topic?"} %>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <%= link_to "Back to Topics", topics_path, class: "btn btn-secondary" %>
       </div>
     </div>
   </div>
@@ -50,11 +55,6 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <%= link_to "Back to Topics", topics_path, class: "btn btn-secondary" %>
   </div>
 </div>
 <%= form_with url: import_flashcards_topic_path(@topic), method: :post, multipart: true, id: "import-form", local: true do |f| %>
