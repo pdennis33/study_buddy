@@ -1,6 +1,9 @@
+require 'csv'
+
 class TopicsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_topic, only: %i[ show edit update destroy start_quiz quiz ]
+  before_action :set_topic,
+    only: %i[ show edit update destroy start_quiz quiz import_flashcards ]
 
   # GET /topics or /topics.json
   def index
@@ -68,6 +71,45 @@ class TopicsController < ApplicationController
     @flashcard = @topic.flashcards.find(params[:flashcard_id])
     @previous_flashcard = @topic.flashcards.where('id < ?', @flashcard.id).last
     @next_flashcard = @topic.flashcards.where('id > ?', @flashcard.id).first
+  end
+
+  def import_flashcards
+    uploaded_file = params[:csv_file]
+
+    unless uploaded_file && uploaded_file.size > 0 && uploaded_file.content_type == "text/csv"
+      flash[:alert] = "Please select a valid CSV file."
+      redirect_to @topic and return
+    end
+
+    # Check for the correct headers
+    headers = CSV.open(uploaded_file.path, &:readline)
+    unless headers.map(&:downcase).map(&:strip).include?("question") &&
+      headers.map(&:downcase).map(&:strip).include?("answer")
+      flash[:alert] = "Please ensure your CSV file has Question and Answer columns and an optional Hint."
+      redirect_to @topic and return
+    end
+
+    if uploaded_file
+      begin
+        ActiveRecord::Base.transaction do
+          CSV.foreach(uploaded_file.path, headers: true,
+            header_converters: [:downcase, :symbol]) do |row|
+            @topic.flashcards.create!(
+              question: row[:question],
+              answer: row[:answer],
+              hint: row[:hint] || nil
+            )
+          end
+        end
+        flash[:notice] = "Flashcards imported successfully!"
+      rescue ActiveRecord::RecordInvalid => e
+        flash[:alert] = "Error importing flashcards: #{e.message}"
+      end
+    else
+      flash[:alert] = "Please select a valid CSV file."
+    end
+
+    redirect_to @topic
   end
 
   private

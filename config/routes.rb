@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     member do
       get 'quiz', to: 'topics#start_quiz'
       get 'quiz/flashcard/:flashcard_id', to: 'topics#quiz', as: 'quiz_flashcard'
+      post 'import_flashcards'
     end
   end
 

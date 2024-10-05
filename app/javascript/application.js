@@ -6,8 +6,8 @@ window.Turbo = Turbo;
 
 mrujs.start();
 
-// Initialize all tooltips on the page
 document.addEventListener("turbo:load", function() {
+  // Initialize all tooltips on the page
   const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
   tooltipTriggerList.forEach(function (tooltipTriggerEl) {
     new bootstrap.Tooltip(tooltipTriggerEl);
