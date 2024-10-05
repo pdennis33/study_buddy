@@ -62,24 +62,6 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "study_buddy_production"
 
-  config.action_mailer.delivery_method = :smtp
-
-  config.action_mailer.perform_caching = false
-
-  config.action_mailer.perform_deliveries = true
-
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.sendgrid.net',
-    port:                 587,
-    domain:               'whispering-bastion-02274-fdd76e5a7d18.herokuapp.com',
-    user_name:            'apikey', # This is literal, don't change it
-    password:             ENV['SENDGRID_API_KEY'], # Fetch from the environment variable set by Heroku
-    authentication:       'plain',
-    enable_starttls_auto: true
-  }
-
-  config.action_mailer.default_url_options = { host: 'whispering-bastion-02274-fdd76e5a7d18.herokuapp.com', protocol: 'https' }
-
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
