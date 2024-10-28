@@ -82,9 +82,13 @@ class TopicsController < ApplicationController
     end
 
     # Check for the correct headers
-    headers = CSV.open(uploaded_file.path, &:readline)
-    unless headers.map(&:downcase).map(&:strip).include?("question") &&
-      headers.map(&:downcase).map(&:strip).include?("answer")
+    headers = CSV.open(uploaded_file.path, &:readline).map do |h|
+      h.sub(/\A\xEF\xBB\xBF/, "").downcase.strip
+    end
+
+    headers.each { |header| p header.bytes }
+
+    unless headers.include?("question") && headers.include?("answer")
       flash[:alert] = "Please ensure your CSV file has Question and Answer columns and an optional Hint."
       redirect_to @topic and return
     end
@@ -113,13 +117,14 @@ class TopicsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_topic
-      @topic = current_user.topics.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def topic_params
-      params.require(:topic).permit(:title, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_topic
+    @topic = current_user.topics.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def topic_params
+    params.require(:topic).permit(:title, :description)
+  end
 end
