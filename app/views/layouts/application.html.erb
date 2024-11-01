@@ -35,6 +35,7 @@ in the way that I envisioned.
         <% end %>
       </ul>
       <ul>
+        <li><a href="https://www.buymeacoffee.com/pauldennis" target="_blank"><img id="bmc-button" src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee"></a></li>
         <% if user_signed_in? %>
           <li>Signed in as <%= current_user.first_name %></li>
           <li><%= button_to 'Sign out', destroy_user_session_path, method: :delete, data: { turbo: false } %></li>

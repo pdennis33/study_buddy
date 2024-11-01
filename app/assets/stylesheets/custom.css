@@ -80,6 +80,7 @@ h1, h2 {
 .header nav ul {
     list-style-type: none;
     display: flex;
+    align-items: center;
 }
 
 .header nav ul a {
@@ -98,4 +99,9 @@ h1, h2 {
 
 input[type="text"], textarea {
     min-width: 450px;
+}
+
+#bmc-button {
+    height: 48px;
+    width: 174px;
 }
