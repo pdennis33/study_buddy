@@ -3,21 +3,25 @@
     <h2 class="mt-5 mb-5"><%= @flashcard.question %></h2>
 
     <div class="mb-5">
-      <button onclick="document.getElementById('hint').style.display='block'" class="btn btn-lg btn-secondary">Show
-        Hint
+      <button id="hint-btn" onclick="toggleElement('hint', 'hint-btn', 'Show Hint', 'Hide Hint')" class="btn btn-lg btn-secondary">
+        Show Hint
       </button>
-      <button onclick="document.getElementById('answer').style.display='block'" class="btn btn-lg btn-secondary">Show
-        Answer
+      <button id="answer-btn" onclick="toggleElement('answer', 'answer-btn', 'Show Answer', 'Hide Answer')" class="btn btn-lg btn-secondary">
+        Show Answer
       </button>
-      <%= link_to 'Edit Flashcard', edit_topic_flashcard_path(@topic, @flashcard),  class: "btn btn-lg btn-secondary"%>
+      <%= link_to 'Edit Flashcard', edit_topic_flashcard_path(@topic, @flashcard), class: "btn btn-lg btn-secondary" %>
     </div>
 
     <div id="hint" class="mb-5" style="display: none;">
-      <h4><span class="badge text-bg-dark mr-1">Hint:</span> <%= @flashcard.hint %></h4>
+      <h4>
+        <span class="badge text-bg-dark mr-1">Hint:</span> <%= @flashcard.hint %>
+      </h4>
     </div>
 
     <div id="answer" class="mb-5" style="display: none;">
-      <h4><span class="badge text-bg-dark mr-1">Answer:</span> <%= @flashcard.answer %></h4>
+      <h4>
+        <span class="badge text-bg-dark mr-1">Answer:</span> <%= @flashcard.answer %>
+      </h4>
     </div>
 
     <div class="mt-2">
@@ -31,8 +35,9 @@
       <% if @next_flashcard %>
         <%= link_to 'Next Question', quiz_flashcard_topic_path(@topic, @next_flashcard), class: 'btn btn-primary btn-lg' %>
       <% else %>
-        <button class="btn btn-primary btn-lg disabled" disabled>Next Question
-        </button>
+        <%= link_to quiz_flashcard_topic_path(@topic, @topic.flashcards.first), class: 'btn btn-secondary btn-lg' do %>
+          <i class="bi bi-arrow-clockwise"></i> Start Over
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -41,4 +46,19 @@
       <%= link_to "Back to #{@topic.title}", topic_path(@topic), class: 'btn btn-secondary' %>
     </div>
   </div>
+
+  <script>
+      function toggleElement(elementId, buttonId, showText, hideText) {
+          const element = document.getElementById(elementId);
+          const button = document.getElementById(buttonId);
+
+          if (element.style.display === 'none' || element.style.display === '') {
+              element.style.display = 'block';
+              button.textContent = hideText;
+          } else {
+              element.style.display = 'none';
+              button.textContent = showText;
+          }
+      }
+  </script>
 </div>
