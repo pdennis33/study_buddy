@@ -1,6 +1,6 @@
 <div class="row mt-5">
   <div class="col-12 text-center">
-    <h2 class="mt-5 mb-5"><%= @flashcard.question %></h2>
+    <h2 class="mt-5 mb-5"><%= simple_format(@flashcard.question) %></h2>
 
     <div class="mb-5">
       <button id="hint-btn" onclick="toggleElement('hint', 'hint-btn', 'Show Hint', 'Hide Hint')" class="btn btn-lg btn-secondary">
@@ -14,13 +14,13 @@
 
     <div id="hint" class="mb-5" style="display: none;">
       <h4>
-        <span class="badge text-bg-dark mr-1">Hint:</span> <%= @flashcard.hint %>
+        <span class="badge text-bg-dark mr-1">Hint:</span> <%= simple_format(@flashcard.hint) %>
       </h4>
     </div>
 
     <div id="answer" class="mb-5" style="display: none;">
       <h4>
-        <span class="badge text-bg-dark mr-1">Answer:</span> <%= @flashcard.answer %>
+        <span class="badge text-bg-dark mr-1">Answer:</span> <%= simple_format(@flashcard.answer) %>
       </h4>
     </div>
 
