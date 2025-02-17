@@ -66,6 +66,13 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
+  config.action_mailer.default_url_options = { host: "pauldenniscodes.com", protocol: "https" }
+  config.action_mailer.asset_host = "https://pauldenniscodes.com"
+  config.action_mailer.delivery_method = :ses_v2
+  config.action_mailer.ses_v2_settings = { region: ENV['AWS_REGION'] }
+  config.action_mailer.logger = ActiveSupport::Logger.new("log/mail.log")
+  config.action_mailer.logger.level = Logger::INFO
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
