@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   get 'home/index'
+
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' },
     skip: [:registrations, :sessions, :passwords]
+
+  resources :contact_messages, only: [:new, :create]
+
   resources :topics do
     resources :flashcards
     member do

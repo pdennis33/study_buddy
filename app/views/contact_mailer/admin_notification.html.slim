@@ -1,0 +1,14 @@
+p
+  | You have received a new contact message:
+
+ul
+  li
+    strong Name:
+    |  #{@contact_message.name.presence || 'Not provided'}
+  li
+    strong Email:
+    |  #{@contact_message.email}
+  li
+    strong Message:
+    br
+    pre = @contact_message.message
