@@ -57,6 +57,8 @@ gem 'omniauth-github', '~> 2.0', '>= 2.0.1'
 gem 'aws-sdk-rails', '~> 5'
 gem 'aws-actionmailer-ses', '~> 1'
 gem 'slim-rails', '~> 3.7'
+gem 'recaptcha', '~> 5.19'
+gem 'rack-attack', '~> 6.7'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
