@@ -6,6 +6,8 @@ p
   | Your input is incredibly valuable, and I’m eager to iterate quickly to make StudyBuddy better!
 
 = form_with model: @contact_message, url: contact_messages_path, data: { turbo: false } do |f|
+  div style="display: none;"
+    = f.text_field :nickname, autocomplete: "off"
   p
     = f.label :name, "Your Name (optional)"
     br
@@ -20,5 +22,10 @@ p
     = f.label :message, "Your Message"
     br
     = f.text_area :message, required: true
+
+  / - if @show_checkbox_recaptcha
+  /   = recaptcha_tags
+  / - else
+  /   = recaptcha_v3(action: "contact_form", site_key: ENV['RECAPTCHA_SECRET_KEY'])
 
   = f.submit "Send Message", class: "btn btn-primary"
