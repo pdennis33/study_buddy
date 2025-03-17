@@ -62,7 +62,7 @@ class Rack::Attack
     end
   end
 
-  throttle("contact_messages/ip", limit: 1, period: 1.minute) do |req|
+  throttle("contact_messages/ip", limit: 5, period: 1.minute) do |req|
     if req.path == "/contact_messages" && req.post?
       puts "Throttling IP: #{req.ip}"
       req.ip
