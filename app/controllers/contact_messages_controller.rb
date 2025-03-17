@@ -23,7 +23,6 @@ class ContactMessagesController < ApplicationController
     else
       show_checkbox_recaptcha = true unless success
       flash.alert = "We couldn't quite verify that you're human. Please check the box below to prove you're not a robot."
-      # render :new, locals: { contact_message_info: contact_message_params}
       redirect_to new_contact_message_path, flash: { contact_message_info: contact_message_params, show_checkbox_recaptcha: show_checkbox_recaptcha }
     end
   end
