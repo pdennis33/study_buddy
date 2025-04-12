@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_27_140615) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_12_143150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_27_140615) do
     t.bigint "topic_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sequence_index", null: false
+    t.index ["topic_id", "sequence_index"], name: "index_flashcards_on_topic_id_and_sequence_index", unique: true
     t.index ["topic_id"], name: "index_flashcards_on_topic_id"
   end
 

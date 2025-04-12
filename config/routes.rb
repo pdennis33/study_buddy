@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   resources :contact_messages, only: [:new, :create]
 
   resources :topics do
-    resources :flashcards
+    resources :flashcards do
+      member do
+        patch :move_up
+        patch :move_down
+      end
+    end
     member do
       get 'quiz', to: 'topics#start_quiz'
       get 'quiz/flashcard/:flashcard_id', to: 'topics#quiz', as: 'quiz_flashcard'

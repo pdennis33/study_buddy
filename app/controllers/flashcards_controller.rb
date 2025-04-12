@@ -1,11 +1,13 @@
 class FlashcardsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_topic
-  before_action :set_flashcard, only: %i[ edit update destroy ]
+  before_action :set_flashcard, only: %i[ edit update destroy move_up move_down ]
+
+  TEMP_SEQUENCE_INDEX = -1
 
   # GET /flashcards or /flashcards.json
   def index
-    @flashcards = @topic.flashcards.where.not(id: nil)
+    @flashcards = @topic.flashcards.where.not(id: nil).order(:sequence_index)
     @flashcard = @topic.flashcards.build
   end
 
@@ -59,6 +61,42 @@ class FlashcardsController < ApplicationController
       format.html { redirect_to topic_flashcards_url, notice: "Flashcard was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def move_up
+    this_flashcard_sequence_index = @flashcard.sequence_index
+    if this_flashcard_sequence_index > 1
+      previous_flashcard = @topic.flashcards.find_by(sequence_index: this_flashcard_sequence_index - 1)
+      if previous_flashcard
+        ActiveRecord::Base.transaction do
+          @flashcard.update(sequence_index: TEMP_SEQUENCE_INDEX)
+          previous_flashcard.update(sequence_index: this_flashcard_sequence_index)
+          @flashcard.update(sequence_index: this_flashcard_sequence_index - 1)
+        end
+      else
+        flash[:alert] = "No previous flashcard found."
+      end
+    end
+
+    redirect_back(fallback_location: topic_flashcards_url)
+  end
+
+  def move_down
+    this_flashcard_sequence_index = @flashcard.sequence_index
+    if this_flashcard_sequence_index < @topic.flashcards.count
+      next_flashcard = @topic.flashcards.find_by(sequence_index: this_flashcard_sequence_index + 1)
+      if next_flashcard
+        ActiveRecord::Base.transaction do
+          @flashcard.update(sequence_index: TEMP_SEQUENCE_INDEX)
+          next_flashcard.update(sequence_index: this_flashcard_sequence_index)
+          @flashcard.update(sequence_index: this_flashcard_sequence_index + 1)
+        end
+      else
+        flash[:alert] = "No next flashcard found."
+      end
+    end
+
+    redirect_back(fallback_location: topic_flashcards_url)
   end
 
   private

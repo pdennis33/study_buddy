@@ -3,3 +3,4 @@
 //= link application.js
 //= link application.css
 //= link flashcards-import.js
+//= link scroll-restore.js
