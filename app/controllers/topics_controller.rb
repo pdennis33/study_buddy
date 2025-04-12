@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
 
   # GET /topics/1 or /topics/1.json
   def show
-    @flashcards = @topic.flashcards.where.not(id: nil)
+    @flashcards = @topic.flashcards.where.not(id: nil).order(:sequence_index)
     @flashcard = @topic.flashcards.build
   end
 
@@ -64,13 +64,13 @@ class TopicsController < ApplicationController
   end
 
   def start_quiz
-    redirect_to quiz_flashcard_topic_path(@topic, @topic.flashcards.first)
+    redirect_to quiz_flashcard_topic_path(@topic, @topic.flashcards.order(:sequence_index).first)
   end
 
   def quiz
     @flashcard = @topic.flashcards.find(params[:flashcard_id])
-    @previous_flashcard = @topic.flashcards.where('id < ?', @flashcard.id).last
-    @next_flashcard = @topic.flashcards.where('id > ?', @flashcard.id).first
+    @previous_flashcard = @topic.flashcards.where('sequence_index < ?', @flashcard.sequence_index).last
+    @next_flashcard = @topic.flashcards.where('sequence_index > ?', @flashcard.sequence_index).first
   end
 
   def import_flashcards

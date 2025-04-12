@@ -36,10 +36,24 @@
           <div class="col">
             <h2 class="card-title">Flashcards</h2>
             <ul>
-              <% @flashcards.each do |flashcard| %>
+              <% @flashcards.each_with_index do |flashcard, index| %>
                 <li>
                   <%= flashcard.question %>
                   <%= link_to 'Edit', edit_topic_flashcard_path(@topic, flashcard) %>
+
+                  <%# Move Up (unless it's the first) %>
+                  <% unless index == 0 %>
+                    <%= button_to "↑", move_up_topic_flashcard_path(@topic, flashcard),
+                      method: :patch,
+                      class: "reorder-button",
+                      form_class: "d-inline" %>
+                  <% end %>
+
+                  <%# Move Down (unless it's the last) %>
+                  <%= button_to "↓", move_down_topic_flashcard_path(@topic, flashcard),
+                    method: :patch,
+                    class: "reorder-button",
+                    form_class: "d-inline" %>
                 </li>
               <% end %>
             </ul>
@@ -61,3 +75,4 @@
   <%= f.file_field :csv_file, id: "file-input", style: "display: none;" %>
 <% end %>
 <%= javascript_include_tag "flashcards-import" %>
+<%= javascript_include_tag "scroll-restore" %>
