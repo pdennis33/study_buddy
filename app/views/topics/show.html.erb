@@ -49,9 +49,11 @@
                   <% end %>
 
                   <%# Move Down (unless it's the last) %>
-                  <%= button_to "↓", move_down_topic_flashcard_path(@topic, flashcard),
-                    class: "reorder-button",
-                    form_class: "d-inline" %>
+                  <% unless index == @flashcards.size - 1 %>
+                    <%= button_to "↓", move_down_topic_flashcard_path(@topic, flashcard),
+                      class: "reorder-button",
+                      form_class: "d-inline" %>
+                  <% end %>
                 </li>
               <% end %>
             </ul>
