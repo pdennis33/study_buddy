@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   resources :topics do
     resources :flashcards do
       member do
-        patch :move_up
-        patch :move_down
+        post :move_up
+        post :move_down
       end
     end
     member do

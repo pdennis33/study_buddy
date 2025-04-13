@@ -44,14 +44,12 @@
                   <%# Move Up (unless it's the first) %>
                   <% unless index == 0 %>
                     <%= button_to "↑", move_up_topic_flashcard_path(@topic, flashcard),
-                      method: :patch,
                       class: "reorder-button",
                       form_class: "d-inline" %>
                   <% end %>
 
                   <%# Move Down (unless it's the last) %>
                   <%= button_to "↓", move_down_topic_flashcard_path(@topic, flashcard),
-                    method: :patch,
                     class: "reorder-button",
                     form_class: "d-inline" %>
                 </li>
