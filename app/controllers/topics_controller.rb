@@ -1,5 +1,3 @@
-require 'csv'
-
 class TopicsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_topic,
